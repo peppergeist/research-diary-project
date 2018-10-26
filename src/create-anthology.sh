@@ -3,7 +3,7 @@
 Year="$1"
 Author="$2"
 Institution="$3"
-Name="$Year-Research-Diary"
+Name="$Year-worklog"
 FileName=$Name".tex"
 tmpName=$Name".tmp"
 
@@ -11,7 +11,7 @@ if [ -z "$Year" ]; then echo "ERROR: Year not specified."; exit; fi
 if [ -z "$Author" ]; then echo "ERROR: Author not specified."; exit; fi
 if [ -z "$Institution" ]; then echo "ERROR: Institution not specified."; exit; fi
 
-echo "Research Diary"
+echo "Worklog"
 echo "User: $Author ($Institution)"
 echo "Year: $Year"
 
@@ -29,18 +29,18 @@ fi
 
 touch $FileName
 echo "%" >> $FileName
-echo "% Research Diary for $Author ($Institution), $Year" >> $FileName
+echo "% Worklog for $Author ($Institution), $Year" >> $FileName
 echo "%" >> $FileName
 echo "\documentclass[letterpaper,11pt]{article}" >> $FileName
 echo "\newcommand{\userName}{$Author}" >> $FileName
 echo "\newcommand{\institution}{$Institution}" >> $FileName
 echo "\usepackage{researchdiary}" >> $FileName
 echo " " >> $FileName
-echo "\title{Research Diary - $Year}" >> $FileName
+echo "\title{Worklog - $Year}" >> $FileName
 echo "\author{$Author}" >> $FileName
 echo " " >> $FileName
 
-echo "\chead{\textsc{Research Diary}}" >> $FileName
+echo "\chead{\textsc{Worklog}}" >> $FileName
 echo "\lhead{\textsc{\userName}}" >> $FileName
 echo "\rfoot{\textsc{\thepage}}" >> $FileName
 echo "\cfoot{\textit{Last modified: \today}}" >> $FileName
