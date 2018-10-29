@@ -4,33 +4,38 @@ year=`date +%G`
 month=`date +%m`
 day=`date +%d`
 
-echo "Today is $year / $month / $day"
+echo "$year/$month/$day"
 
 if [ ! -d "$year" ]; then
     mkdir $year
-    mkdir $year/images
-    cd $year
-    ln -s ../images/amazon-logo.eps .
-    ln -s ../images/amazon-logo.png .
-    ln -s ../src/sloglog.sty .
-    ln -s ../src/clean.sh clean
-    ln -s ../src/compile-today.sh compile-today
-    cd ..
-fi
-
-if [ -d "$year" ]; then
-    echo "Adding new entry to directory $year."
 fi
 
 cd $year
+
+if [ ! -d "$month" ]; then
+    mkdir $month
+    cd $month
+    ln -s ../../src/sloglog.sty .
+    ln -s ../../src/clean.sh clean
+    mkdir images
+    cd images
+    ln -s ../../../images/amazon-logo.eps .
+    ln -s ../../../images/amazon-logo.png .
+    cd ..
+fi
+
+if [ -d "$month" ]; then
+    echo "Adding new entry to directory $year/$month."
+fi
+
 filename=$year-$month-$day.tex
 
 if [ -f "$filename" ]; then
-    echo "A file called '$filename' already exists in diretory $year. Aborting addition of new entry."
+    echo "A file called '$filename' already exists in directory $year/$month."
     exit
 fi
 
-cp ../src/entry.tex $filename
+cp ../../src/entry.tex $filename
 
 platform=`uname`
 if [[ "$platform" == 'Darwin' ]]; then
@@ -45,4 +50,4 @@ else
     sed -i "s/@day/`date +%e`/g" $filename
 fi
 
-echo "Finished adding $filename to $year."
+echo "Created $filename in $year/$month."
