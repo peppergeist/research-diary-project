@@ -21,11 +21,12 @@ if [ ! -d "$month" ]; then
     cd images
     ln -s ../../../images/amazon-logo.eps .
     ln -s ../../../images/amazon-logo.png .
-    cd ..
+    cd ../..
 fi
 
 if [ -d "$month" ]; then
     echo "Adding new entry to directory $year/$month."
+    cd $month
 fi
 
 filename=$year-$month-$day.tex
